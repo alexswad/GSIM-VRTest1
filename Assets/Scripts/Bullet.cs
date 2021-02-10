@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Bullet : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class Bullet : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collider)
+    void OnCollisionEnter(Collision collision)
     {
-        collider.collider.gameObject.SendMessage("ApplyDamage");
+        if (collision.collider.GetComponent<Balloon>() != null)
+            collision.collider.gameObject.SendMessage("ApplyDamage");
     }
 }
